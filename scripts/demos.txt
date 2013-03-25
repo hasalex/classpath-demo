@@ -1,0 +1,33 @@
+Démo 1 (bootclasspath)
+
+java fr.sewatech.classpath.Count 40 45
+java -cp lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+java -Xbootclasspath/p:lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+
+
+Démo 2 (custom)
+
+java -cp "lib/*" fr.sewatech.classpath.Hello
+java -cp lib/cl-demo.jar fr.sewatech.classpath.Hello
+java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
+java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
+=> illustrer
+
+
+Démo 3 (hell)
+
+java -cp "lib/*" fr.sewatech.classpath.Hello log
+=> illustrer
+
+
+Démo 4 (jboss modules)
+
+java -jar lib/jboss-modules.jar -mp modules fr.sewatech.conference.classloader-demo
+
+Démo 5 (tomcat modules)
+
+
+
