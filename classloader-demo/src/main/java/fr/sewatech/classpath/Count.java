@@ -19,6 +19,13 @@ public class Count {
 
         for (Integer i = start; i <= stop; i++) {
             System.out.println("\t" + i);
+            slowDown();
+        }
+    }
+    private static void slowDown() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
         }
     }
 }

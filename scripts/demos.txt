@@ -7,8 +7,8 @@ java -Xbootclasspath/p:lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
 
 Démo 2 (custom)
 
-java -cp "lib/*" fr.sewatech.classpath.Hello
 java -cp lib/cl-demo.jar fr.sewatech.classpath.Hello
+java -cp "lib/*" fr.sewatech.classpath.Hello
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaURL
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
@@ -28,6 +28,5 @@ Démo 4 (jboss modules)
 java -jar lib/jboss-modules.jar -mp modules fr.sewatech.conference.classloader-demo
 
 Démo 5 (tomcat modules)
-
-
-
+mvn clean install
+mvn clean install -Pmodule

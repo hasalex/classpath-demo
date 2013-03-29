@@ -3,6 +3,8 @@ package fr.sewatech.classpath;
 import fr.sewatech.classloader.MavenRepositoryClassLoader;
 import fr.sewatech.classloader.MavenRepositoryLocalFirstClassLoader;
 
+import java.io.OutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 public class HelloViaMvnRepo {
@@ -26,10 +28,13 @@ public class HelloViaMvnRepo {
             classLoader = new MavenRepositoryClassLoader(artefacts);
         }
 
-        Class<?> mainClass = Class.forName("fr.sewatech.message.Main",
+         Class<?> mainClass = Class.forName("fr.sewatech.message.Main",
                                         true,
                                         classLoader);
+
+        Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
+        Object mainObject = constructor.newInstance(System.out);
         Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
-        mainMethod.invoke(null, false);
+        mainMethod.invoke(mainObject, false);
     }
 }

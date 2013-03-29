@@ -1,6 +1,8 @@
 package fr.sewatech.classpath;
 
 import java.io.File;
+import java.io.OutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -20,10 +22,12 @@ public class HelloViaURL {
         URLClassLoader classLoader = new URLClassLoader(urls.toArray(new URL[urls.size()]));
 
         Class<?> mainClass = Class.forName("fr.sewatech.message.Main",
-                true,
-                classLoader);
+                                            true,
+                                            classLoader);
 
+        Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
+        Object mainObject = constructor.newInstance(System.out);
         Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
-        mainMethod.invoke(null, false);
+        mainMethod.invoke(mainObject, false);
     }
 }

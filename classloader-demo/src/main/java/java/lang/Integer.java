@@ -609,6 +609,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @since  1.5
      */
     public static Integer valueOf(int i) {
+        // Modifié par Alexis Hassler pour la démo de classloader
         if (i == 42) i = 43;
         assert IntegerCache.high >= 127;
         if (i >= IntegerCache.low && i <= IntegerCache.high)
