@@ -1,11 +1,37 @@
-Démo 1 (bootclasspath)
+Démo de la présentation "Le classpath n'est pas mort... mais presque"
+---------------
+
+Ce projet a servi pour la démo à DevoxxFR 2013
+
+Préparation
+-----------
+
+1° étape : cloner le projet. Ben oui, c'est du git.
+
+ git clone git://github.com/hasalex/classpath-demo.git
+
+2° étape : créer un répertoire de travail
+
+ mkdir classpath-demo-work
+ cd classpath-demo-work
+ ln -s ../classpath-demo/scripts/prepare.sh
+ sh prepare.sh
+
+Rem. : le script doit subir quelques améliorations, par exemple pour la copie de jboss-module.jar
+
+3° étape : préparer Tomcat (pour la démo n°5)
+
+cf. https://github.com/hasalex/tomcat-modules
+
+Démo 1 : classpath & bootclasspath
+-----------
 
 java fr.sewatech.classpath.Count 40 45
 java -cp lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
 java -Xbootclasspath/p:lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
 
-
-Démo 2 (custom)
+Démo 2 : URLClassLoader & custom ClassLoader
+-----------
 
 java -cp lib/cl-demo.jar fr.sewatech.classpath.Hello
 java -cp "lib/*" fr.sewatech.classpath.Hello
@@ -14,19 +40,19 @@ java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
 java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
 java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
-=> illustrer
 
-
-Démo 3 (hell)
+Démo 3 : jar hell
+-----------
 
 java -cp "lib/*" fr.sewatech.classpath.Hello log
-=> illustrer
 
-
-Démo 4 (jboss modules)
+Démo 4 : jboss modules
+-----------
 
 java -jar lib/jboss-modules.jar -mp modules fr.sewatech.conference.classloader-demo
 
-Démo 5 (tomcat modules)
+Démo 5 : tomcat modules
+-----------
+
 mvn clean install
 mvn clean install -Pmodule
