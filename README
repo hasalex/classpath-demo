@@ -6,9 +6,17 @@ Ce projet a servi pour la démo à DevoxxFR 2013
 Préparation
 -----------
 
+0-Prérequis : utiliser JDK 7 ou superieur, Maven est configuré ainsi.
+
 1° étape : cloner le projet. Ben oui, c'est du git.
 
  git clone git://github.com/hasalex/classpath-demo.git
+ 
+ cloner et builder le projet tomcat-modules dont il depend
+ cf. https://github.com/hasalex/tomcat-modules
+ 
+ Pour cloner sous eclipse avec eGit, ajouter  à la racine le fichier .project avant d'importer le projet
+ Ceci pour definir un projet maven multi-modules.
 
 2° étape : créer un répertoire de travail
 
@@ -16,6 +24,11 @@ Préparation
  cd classpath-demo-work
  ln -s ../classpath-demo/scripts/prepare.sh
  sh prepare.sh
+
+Rem. : pour l'utiliser sous l'os windows utiliser 'git bash' : ca marche
+par exemple pour setter le JAVA_HOME, ajouter en debut de script (attention au chemin des repertoires !)
+export JAVA_HOME=/c/Java/jdk1.7.0_12
+export PATH=$JAVA_HOME/bin:$PATH
 
 Rem. : le script doit subir quelques améliorations, par exemple pour la copie de jboss-module.jar
 
