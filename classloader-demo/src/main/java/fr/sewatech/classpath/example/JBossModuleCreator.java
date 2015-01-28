@@ -9,12 +9,12 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class JBossModuleCreator {
 
-    public static final String MODULES_ROOT = "/Volumes/MacHDD/ProjetBis/conference/classpath-demo-cli/modules";
     private static final String VERSION = "1.0-SNAPSHOT";
     private static final String SW_GROUP_ID = "fr.sewatech.conference";
 
     public static void main(String[] args) throws IOException {
-        JBossModuleCreator moduleCreator = new JBossModuleCreator(MODULES_ROOT);
+        JBossModuleCreator moduleCreator = new JBossModuleCreator(System.getProperty("modules.root"));
+        //JBossModuleCreator moduleCreator = new JBossModuleCreator("/Users/alexis/Projets/jug/demo/modules");
 
         Artefact slf4j15 = moduleCreator.createModuleFromArtefact("org.slf4j:slf4j-api:1.5.11");
         Artefact slf4j17 = moduleCreator.createModuleFromArtefact("org.slf4j:slf4j-api:1.7.2");
