@@ -20,7 +20,7 @@ public class Main {
 
     public void hello(boolean withLog) {
         Printer printer = new MessagePrinter(outputStream);
-        Message message = new Message("Hello {}", "DevoxxFR");
+        Message message = new Message("Hello {}", "ElsassJUG");
         printer.print(message);
         if (withLog) log(message);
     }

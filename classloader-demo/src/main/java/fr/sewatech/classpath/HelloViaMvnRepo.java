@@ -17,10 +17,12 @@ public class HelloViaMvnRepo {
             version = args[0];
         }
 
-        String[] artefacts = {"fr.sewatech.conference:message-main:" + version,
+        String[] artefacts = {
+                "fr.sewatech.conference:message-main:" + version,
                 "fr.sewatech.conference:message-common:" + version,
                 "fr.sewatech.conference:message-printer:" + version,
-                "org.slf4j:slf4j-api:1.5.11"};
+                "org.slf4j:slf4j-api:1.5.11"
+        };
         ClassLoader classLoader;
         if (args.length > 1 && args[1].equals("local")) {
             classLoader = new MavenRepositoryLocalFirstClassLoader(artefacts);
