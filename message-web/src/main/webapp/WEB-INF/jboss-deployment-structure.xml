@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="logging" />
+        </exclude-subsystems>
+
+<!--
+        <dependencies>
+            <module name="fr.sewatech.conference.message-main" />
+        </dependencies>
+-->
+
+    </deployment>
+</jboss-deployment-structure>

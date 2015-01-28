@@ -39,33 +39,83 @@ cf. https://github.com/hasalex/tomcat-modules
 Démo 1 : classpath & bootclasspath
 -----------
 
+# Ça ne marche pas
 java fr.sewatech.classpath.Count 40 45
+
+# Ça marche
 java -cp lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+
+# Court-circuiter le Integer par défaut
 java -Xbootclasspath/p:lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+
+# En théorie, le endorsed ne devrait pas avoir d'effet sur Integer. En réalité,...
+java -Djava.endorsed.dirs=lib fr.sewatech.classpath.Count 40 45
 
 Démo 2 : URLClassLoader & custom ClassLoader
 -----------
 
+# Ça ne marche pas
 java -cp lib/cl-demo.jar fr.sewatech.classpath.Hello
+
+# Ça marche
 java -cp "lib/*" fr.sewatech.classpath.Hello
+
+# Ça marche
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaURL
+
+# Ça ne marche pas
+java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaURL
+
+# Ça marche
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+# Ça marche
 java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
-java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
-java -cp lib/cl-demo.jar:lib/msg-printer.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
+
+# Ça ne marche pas
+java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+# Ça marche
+java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
 
 Démo 3 : jar hell
 -----------
 
+# Ça ne marche pas
 java -cp "lib/*" fr.sewatech.classpath.Hello log
 
 Démo 4 : jboss modules
 -----------
 
+# Ça marche
 java -jar lib/jboss-modules.jar -mp modules fr.sewatech.conference.classloader-demo
 
-Démo 5 : tomcat modules
+Démo 5 : wildfly
 -----------
 
+export JBOSS_HOME=/opt/java/wildfly-8.1.0.demo
+
+# Ça ne marche pas
 mvn clean install
+cp message-web/target/msg.war $JBOSS_HOME/standalone/deployments/
+open http://localhost:8080/msg
+
+# Ça marche
+cp modules/fr $JBOSS_HOME/modules/
 mvn clean install -Pmodule
+cp message-web/target/msg.war $JBOSS_HOME/standalone/deployments/
+open http://localhost:8080/msg
+
+
+Démo 6 : tomcat modules
+-----------
+
+export CATALINE_HOME=/opt/java/apache-tomcat-7.0.33-modules
+
+# Ça ne marche pas
+mvn clean install
+cp message-web/target/msg.war $CATALINE_HOME/webapps/
+open http://localhost:8080/msg
+
+# Ça marche (du moins, ça devrait)
+mvn clean install -Pmodule
+cp message-web/target/msg.war $CATALINE_HOME/webapps/
+open http://localhost:8080/msg

@@ -13,8 +13,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <tomcat.home>/opt/java/apache-tomcat-modules-7.0.33</tomcat.home>
-        <jboss.module.dir>/Volumes/MacHDD/ProjetBis/conference/classpath-demo-cli/modules</jboss.module.dir>
+        <tomcat.home>/opt/java/apache-tomcat-7.0.33-modules</tomcat.home>
+        <jboss.module.dir>/Users/alexis/Projets/jug/demo/modules</jboss.module.dir>
     </properties>
 
     <dependencies>
