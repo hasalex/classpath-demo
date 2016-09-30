@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<module xmlns="urn:jboss:module:1.1" name="org.slf4j.slf4j-api" slot="1.5">
+
+    <resources>
+        <resource-root path="slf4j-api-15.jar"/>
+    </resources>
+</module>

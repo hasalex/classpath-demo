@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>message-printer</artifactId>
+    <artifactId>message-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,9 +18,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>message-printer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.11</version>
+            <version>1.7.2</version>
         </dependency>
     </dependencies>
 

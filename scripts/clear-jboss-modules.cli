@@ -1,0 +1,7 @@
+module remove --name=org.slf4j.slf4j-api --slot=1.5
+module remove --name=org.slf4j.slf4j-api --slot=1.7
+
+module remove --name=fr.sewatech.message-common
+module remove --name=fr.sewatech.message-printer
+module remove --name=fr.sewatech.message-service
+module remove --name=fr.sewatech.message-launcher

@@ -6,7 +6,7 @@ Ce projet a servi pour la démo à DevoxxFR 2013
 Préparation
 -----------
 
-0-Prérequis : utiliser JDK 7 ou superieur, Maven est configuré ainsi.
+0-Prérequis : utiliser JDK 8, Maven est configuré ainsi.
 
 1° étape : cloner le projet. Ben oui, c'est du git.
 
@@ -22,19 +22,14 @@ Préparation
 
  mkdir classpath-demo-work
  cd classpath-demo-work
- ln -s ../classpath-demo/scripts/prepare.sh
- sh prepare.sh
+ sh ../classpath-demo/scripts/prepare.sh
 
 Rem. : pour l'utiliser sous l'os windows utiliser 'git bash' : ca marche
 par exemple pour setter le JAVA_HOME, ajouter en debut de script (attention au chemin des repertoires !)
-export JAVA_HOME=/c/Java/jdk1.7.0_12
+export JAVA_HOME=/c/Java/jdk1.8.0_102
 export PATH=$JAVA_HOME/bin:$PATH
 
 Rem. : le script doit subir quelques améliorations, par exemple pour la copie de jboss-module.jar
-
-3° étape : préparer Tomcat (pour la démo n°5)
-
-cf. https://github.com/hasalex/tomcat-modules
 
 Démo 1 : classpath & bootclasspath
 -----------
@@ -43,10 +38,10 @@ Démo 1 : classpath & bootclasspath
 java fr.sewatech.classpath.Count 40 45
 
 # Ça marche
-java -cp lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+java -cp lib/message-launcher.jar fr.sewatech.classpath.Count 40 45
 
 # Court-circuiter le Integer par défaut
-java -Xbootclasspath/p:lib/cl-demo.jar fr.sewatech.classpath.Count 40 45
+java -Xbootclasspath/p:lib/message-launcher.jar fr.sewatech.classpath.Count 40 45
 
 # En théorie, le endorsed ne devrait pas avoir d'effet sur Integer. En réalité,...
 java -Djava.endorsed.dirs=lib fr.sewatech.classpath.Count 40 45
@@ -55,26 +50,26 @@ Démo 2 : URLClassLoader & custom ClassLoader
 -----------
 
 # Ça ne marche pas
-java -cp lib/cl-demo.jar fr.sewatech.classpath.Hello
+java -cp lib/message-launcher.jar fr.sewatech.classpath.Hello
 
 # Ça marche
 java -cp "lib/*" fr.sewatech.classpath.Hello
 
 # Ça marche
-java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaURL
 
 # Ça ne marche pas
-java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaURL
 
 # Ça marche
-java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
 # Ça marche
-java -cp lib/cl-demo.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
 
 # Ça ne marche pas
-java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
 # Ça marche
-java -cp lib/cl-demo.jar:lib/message-main.jar fr.sewatech.classpath.HelloViaMvnRepo 1.0-SNAPSHOT local
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
 
 Démo 3 : jar hell
 -----------
@@ -85,37 +80,7 @@ java -cp "lib/*" fr.sewatech.classpath.Hello log
 Démo 4 : jboss modules
 -----------
 
-# Ça marche
-java -jar lib/jboss-modules.jar -mp modules fr.sewatech.conference.classloader-demo
-
-Démo 5 : wildfly
------------
-
-export JBOSS_HOME=/opt/java/wildfly-8.1.0.demo
-
-# Ça ne marche pas
-mvn clean install
-cp message-web/target/msg.war $JBOSS_HOME/standalone/deployments/
-open http://localhost:8080/msg
-
-# Ça marche
-cp modules/fr $JBOSS_HOME/modules/
-mvn clean install -Pmodule
-cp message-web/target/msg.war $JBOSS_HOME/standalone/deployments/
-open http://localhost:8080/msg
-
-
-Démo 6 : tomcat modules
------------
-
-export CATALINE_HOME=/opt/java/apache-tomcat-7.0.33-modules
-
-# Ça ne marche pas
-mvn clean install
-cp message-web/target/msg.war $CATALINE_HOME/webapps/
-open http://localhost:8080/msg
-
-# Ça marche (du moins, ça devrait)
-mvn clean install -Pmodule
-cp message-web/target/msg.war $CATALINE_HOME/webapps/
-open http://localhost:8080/msg
+# Ça marche, comme avant (si les dépendances ont les bons slots)
+java -jar jboss-modules/jboss-modules.jar -mp jboss-modules fr.sewatech.message-launcher
+# Ça marche, mieux qu'avant
+java -jar jboss-modules/jboss-modules.jar -mp jboss-modules fr.sewatech.message-launcher log

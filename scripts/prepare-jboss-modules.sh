@@ -1,0 +1,31 @@
+#!/bin/bash
+source `dirname $0`/setenv.sh
+
+cd $src_home
+mvn clean install -Pjboss
+
+rm -rf $demo_home/jboss-modules
+mkdir -p $demo_home/jboss-modules
+
+jars_dir=$src_home/message-launcher/target/dependency
+cp $jars_dir/../message-launcher.jar $jars_dir
+
+function mkmod()
+{
+    mkdir -p $demo_home/jboss-modules/fr/sewatech/$1/main
+    cp $jars_dir/$1.jar $demo_home/jboss-modules/fr/sewatech/$1/main/
+    cp $script_home/resources-jboss/$1-module.xml $demo_home/jboss-modules/fr/sewatech/$1/main/module.xml
+}
+
+mkmod message-launcher
+mkmod message-service
+mkmod message-printer
+mkmod message-common
+mkdir -p $demo_home/jboss-modules/org/slf4j/slf4j-api/1.5
+cp $jars_dir/slf4j-api.jar $demo_home/jboss-modules/org/slf4j/slf4j-api/1.5/slf4j-api-15.jar
+cp $script_home/resources-jboss/slf4j-api-15-module.xml $demo_home/jboss-modules/org/slf4j/slf4j-api/1.5/module.xml
+mkdir -p $demo_home/jboss-modules/org/slf4j/slf4j-api/1.7
+cp $jars_dir/slf4j-api-17.jar $demo_home/jboss-modules/org/slf4j/slf4j-api/1.7/slf4j-api-17.jar
+cp $script_home/resources-jboss/slf4j-api-17-module.xml $demo_home/jboss-modules/org/slf4j/slf4j-api/1.7/module.xml
+
+cp $jars_dir/jboss-modules.jar $demo_home/jboss-modules/

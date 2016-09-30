@@ -1,0 +1,19 @@
+module add --name=org.slf4j.slf4j-api --slot=1.5       \
+           --resources=~/.m2/repository/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar
+module add --name=org.slf4j.slf4j-api --slot=1.7       \
+           --resources=~/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar
+
+set version=2.0-SNAPSHOT
+module add --name=fr.sewatech.message-common           \
+           --resources=~/.m2/repository/fr/sewatech/conference/message-common/$version/message-common-$version.jar
+module add --name=fr.sewatech.message-printer          \
+           --resources=~/.m2/repository/fr/sewatech/conference/message-printer/$version/message-printer-$version.jar \
+           --dependencies=fr.sewatech.message-common,org.slf4j.slf4j-api
+module add --name=fr.sewatech.message-service          \
+           --resources=~/.m2/repository/fr/sewatech/conference/message-service/$version/message-service-$version.jar \
+           --dependencies=fr.sewatech.message-common,fr.sewatech.message-printer,org.slf4j.slf4j-api
+module add --name=fr.sewatech.message-launcher         \
+           --resources=~/.m2/repository/fr/sewatech/conference/message-launcher/$version/message-launcher-$version.jar \
+           --dependencies=fr.sewatech.message-service  \
+           --main-class=fr.sewatech.classpath.Hello
+# Fix manually the slots for the dependenies to slf4j

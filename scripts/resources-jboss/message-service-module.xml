@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<module xmlns="urn:jboss:module:1.1" name="fr.sewatech.message-service">
+
+    <resources>
+        <resource-root path="message-service.jar"/>
+    </resources>
+
+    <dependencies>
+        <module name="fr.sewatech.message-common"/>
+        <module name="fr.sewatech.message-printer"/>
+        <module name="org.slf4j.slf4j-api" slot="1.7"/>
+    </dependencies>
+</module>

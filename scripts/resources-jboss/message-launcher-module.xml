@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<module xmlns="urn:jboss:module:1.1" name="fr.sewatech.message-launcher">
+
+    <main-class name="fr.sewatech.classpath.Hello"/>
+
+    <resources>
+        <resource-root path="message-launcher.jar"/>
+    </resources>
+
+    <dependencies>
+        <module name="fr.sewatech.message-service"/>
+    </dependencies>
+</module>
