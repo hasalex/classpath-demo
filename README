@@ -34,6 +34,10 @@ Rem. : le script doit subir quelques améliorations, par exemple pour la copie d
 Démo 1 : classpath & bootclasspath
 -----------
 
+# Build with maven
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+../classpath-demo/scripts/prepare-classpath.sh
+
 # Ça ne marche pas
 java fr.sewatech.classpath.Count 40 45
 
@@ -48,6 +52,9 @@ java -Djava.endorsed.dirs=lib fr.sewatech.classpath.Count 40 45
 
 Démo 2 : URLClassLoader & custom ClassLoader
 -----------
+
+# Build (dans le bon répertoire)
+cd ../classpath-demo; mvn install; cd ../classpath-demo-work
 
 # Ça ne marche pas
 java -cp lib/message-launcher.jar fr.sewatech.classpath.Hello
@@ -80,7 +87,79 @@ java -cp "lib/*" fr.sewatech.classpath.Hello log
 Démo 4 : jboss modules
 -----------
 
+# Build (dans le bon répertoire)
+../classpath-demo/scripts/prepare-jboss-modules.sh
+
 # Ça marche, comme avant (si les dépendances ont les bons slots)
 java -jar jboss-modules/jboss-modules.jar -mp jboss-modules fr.sewatech.message-launcher
 # Ça marche, mieux qu'avant
 java -jar jboss-modules/jboss-modules.jar -mp jboss-modules fr.sewatech.message-launcher log
+
+Démo 5a : java 9 - mode classpath
+-----------
+
+export JAVA_HOME=~/Projet/hasalex/jigsaw/jdk-9b134.jdk/Contents/Home
+
+# Ça ne marche toujours pas
+java fr.sewatech.classpath.Count 40 45
+# Ça marche encore
+java -cp lib/message-launcher.jar fr.sewatech.classpath.Count 40 45
+# Erreur : -Xbootclasspath/p is no longer a supported option
+java -Xbootclasspath/p:lib/message-launcher.jar fr.sewatech.classpath.Count 40 45
+# Erreur : -Djava.endorsed.dirs=lib is not supported
+java -Djava.endorsed.dirs=lib fr.sewatech.classpath.Count 40 45
+
+# KO
+java -cp lib/message-launcher.jar fr.sewatech.classpath.Hello
+# OK
+java -cp "lib/*" fr.sewatech.classpath.Hello
+# OK
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaURL
+# KO
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaURL
+# OK
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+# OK
+java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+# KO
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+# OK
+java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+# KO
+java -cp "lib/*" fr.sewatech.classpath.Hello log
+
+# expliquer les modules internes (java.xml.bind)
+java -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
+java --add-modules java.xml.bind -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
+
+Démo 5b : java 9 - jigsaw
+-----------
+
+# Build (dans le bon répertoire) avec JDK 9 mais pas plus que build 134
+export JAVA_HOME=~/Projet/hasalex/jigsaw/jdk-9b134.jdk/Contents/Home
+cd ../classpath-demo; mvn clean install -Pjigsaw; cd ../classpath-demo-work
+
+# OK
+java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello
+# OK
+java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaURL
+# OK
+java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+# KO
+java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello log
+
+# => expliquer les modules, requires, exports
+# => expliquer les modules automatiques
+
+# Modules vs Classpath : aucun changement visible
+# classpath = unnamed module
+java --add-modules java.xml.bind -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
+java --module-path jigsaw-modules -m misc.examples/fr.sewatech.classpath.example.StandardClassLoading
+
+Démo 6 : java 9 - jigsaw++
+-----------
+
+# JDK 9 b136 - avec jigsaw nightly
+export JAVA_HOME=~/Projet/hasalex/jigsaw/jdk-9b136.jdk/Contents/Home
+# Pas de build Maven, ça ne marche toujours pas avec les derniers nightly

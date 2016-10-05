@@ -18,7 +18,7 @@ public class ClassUtil {
 
     private static void print(ClassLoader classLoader) {
         if (classLoader == null) {
-            out.println("null (represents the bootstrap classpath)");
+            out.println("null (represents the bootstrap classloader)");
         } else {
             out.println(classLoader.getClass().getName());
         }
