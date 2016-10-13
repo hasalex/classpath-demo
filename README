@@ -162,4 +162,3 @@ Démo 6 : java 9 - jigsaw++
 
 # JDK 9 b136 - avec jigsaw nightly
 export JAVA_HOME=~/Projet/hasalex/jigsaw/jdk-9b136.jdk/Contents/Home
-# Pas de build Maven, ça ne marche toujours pas avec les derniers nightly

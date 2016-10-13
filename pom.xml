@@ -57,6 +57,7 @@
             <properties>
                 <maven.compiler.source>9</maven.compiler.source>
                 <maven.compiler.target>9</maven.compiler.target>
+                <plexusCompilerVersion>2.8.2-SNAPSHOT</plexusCompilerVersion>
             </properties>
             <build>
                 <plugins>
@@ -92,11 +93,56 @@
                                 <artifactId>asm</artifactId>
                                 <version>6.0_ALPHA</version>
                             </dependency>
+
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-compiler-api</artifactId>
+                                <version>${plexusCompilerVersion}</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.codehaus.plexus</groupId>
+                                        <artifactId>plexus-component-api</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-compiler-manager</artifactId>
+                                <version>${plexusCompilerVersion}</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.codehaus.plexus</groupId>
+                                        <artifactId>plexus-component-api</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-compiler-javac</artifactId>
+                                <version>${plexusCompilerVersion}</version>
+                                <scope>runtime</scope>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.codehaus.plexus</groupId>
+                                        <artifactId>plexus-component-api</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
                         </dependencies>
                     </plugin>
                 </plugins>
             </build>
+            <pluginRepositories>
+                <pluginRepository>
+                    <!-- plexus-compiler snapshot -->
+                    <id>hasalex bintray</id>
+                    <url>https://dl.bintray.com/hasalex/generic/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
         </profile>
     </profiles>
-
 </project>
