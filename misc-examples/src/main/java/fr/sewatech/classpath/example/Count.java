@@ -1,4 +1,4 @@
-package fr.sewatech.classpath;
+package fr.sewatech.classpath.example;
 
 public class Count {
     public static void main(String[] args) {

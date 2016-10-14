@@ -5,8 +5,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class MavenRepositoryClassLoader extends URLClassLoader {
-    public MavenRepositoryClassLoader(String[] artefacts) {
+public class MavenRepositoryParentFirstClassLoader extends URLClassLoader {
+    public MavenRepositoryParentFirstClassLoader(String[] artefacts) {
         super(new URL[]{});
         for (String artefact : artefacts) {
             try {

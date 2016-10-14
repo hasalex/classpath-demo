@@ -9,11 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class Service {
-
-    private static final String PREFIX = "Salut à toi";
 
     private List<String> lines;
 
@@ -25,24 +22,20 @@ public class Service {
 
     public Service(OutputStream outputStream) {
         this.outputStream = new PrintStream(outputStream);
-
-        lines = readAllLines("/lyrics.txt")
-                .stream()
-                .filter(line -> line.startsWith(PREFIX))
-                .map(line -> line.substring(PREFIX.length() + 1))
-                .collect(Collectors.toList());
+        this.lines = readAllLines("/lyrics-lite.txt");
     }
 
     public void hello(boolean withLog) {
         Printer printer = new MessagePrinter(outputStream);
         String line = lines.get(ThreadLocalRandom.current().nextInt(lines.size()));
-        Message message = new Message(PREFIX + " {}", line);
+        Message message = new Message("Salut à toi {}", line);
         printer.print(message);
-        if (withLog) log(message);
+        if (withLog) log(line);
     }
 
-    private void log(Message message) {
-        System.err.println("*** LOG : " + MessageFormatter.arrayFormat(message.getTemplate(), message.getParams()).getMessage() + " ***\n");
+    private void log(String... text) {
+        System.err.println("*** LOG : " + MessageFormatter.arrayFormat("Message to \"{}\"", text)
+                .getMessage() + " ***\n");
     }
 
     private List<String> readAllLines(String path) {

@@ -1,6 +1,6 @@
 package fr.sewatech.classpath;
 
-import fr.sewatech.classloader.MavenRepositoryClassLoader;
+import fr.sewatech.classloader.MavenRepositoryParentFirstClassLoader;
 import fr.sewatech.classloader.MavenRepositoryLocalFirstClassLoader;
 
 import java.io.OutputStream;
@@ -18,7 +18,7 @@ public class HelloViaMvnRepo {
         }
 
         String[] artefacts = {
-                "fr.sewatech.conference:message-main:" + version,
+                "fr.sewatech.conference:message-service:" + version,
                 "fr.sewatech.conference:message-common:" + version,
                 "fr.sewatech.conference:message-printer:" + version,
                 "org.slf4j:slf4j-api:1.5.11"
@@ -27,7 +27,7 @@ public class HelloViaMvnRepo {
         if (args.length > 1 && args[1].equals("local")) {
             classLoader = new MavenRepositoryLocalFirstClassLoader(artefacts);
         } else {
-            classLoader = new MavenRepositoryClassLoader(artefacts);
+            classLoader = new MavenRepositoryParentFirstClassLoader(artefacts);
         }
 
          Class<?> mainClass = Class.forName("fr.sewatech.message.Service",

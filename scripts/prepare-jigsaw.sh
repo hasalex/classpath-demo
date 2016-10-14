@@ -16,3 +16,5 @@ mkdir -p $demo_home/jigsaw-modules
 cp $src_home/message-launcher/target/*.jar $demo_home/jigsaw-modules/
 cp $dep_dir/*.jar $demo_home/jigsaw-modules/
 cp $src_home/misc-examples/target/*.jar $demo_home/jigsaw-modules/
+
+jar --update --file $demo_home/jigsaw-modules/misc-examples.jar --main-class fr.sewatech.classpath.example.JigsawClassloading

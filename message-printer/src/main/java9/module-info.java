@@ -1,5 +1,5 @@
 module message.printer {
     requires message.common;
     requires slf4j.api;
-    exports fr.sewatech.message.printer;
+    exports private fr.sewatech.message.printer;
 }

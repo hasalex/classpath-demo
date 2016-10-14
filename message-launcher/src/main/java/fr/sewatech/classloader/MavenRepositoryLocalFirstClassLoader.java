@@ -1,6 +1,6 @@
 package fr.sewatech.classloader;
 
-public class MavenRepositoryLocalFirstClassLoader extends MavenRepositoryClassLoader {
+public class MavenRepositoryLocalFirstClassLoader extends MavenRepositoryParentFirstClassLoader {
     public MavenRepositoryLocalFirstClassLoader(String[] artefacts) {
         super(artefacts);
     }
