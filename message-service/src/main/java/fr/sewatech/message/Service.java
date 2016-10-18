@@ -22,7 +22,7 @@ public class Service {
 
     public Service(OutputStream outputStream) {
         this.outputStream = new PrintStream(outputStream);
-        this.lines = readAllLines("/lyrics-lite.txt");
+        this.lines = readAllLines("/lyrics.txt");
     }
 
     public void hello(boolean withLog) {
