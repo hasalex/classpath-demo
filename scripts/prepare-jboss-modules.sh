@@ -2,7 +2,7 @@
 source `dirname $0`/setenv.sh
 
 cd $src_home
-mvn clean install -Pjboss
+run mvn clean install -Pjboss
 
 rm -rf $demo_home/jboss-modules
 mkdir -p $demo_home/jboss-modules
@@ -16,6 +16,7 @@ function mkmod()
     cp $script_home/resources-jboss/$1-module.xml $demo_home/jboss-modules/fr/sewatech/$1/main/module.xml
 }
 
+log "Create JBoss Modules"
 mkmod message-launcher
 mkmod message-service
 mkmod message-printer
@@ -28,3 +29,5 @@ cp $dep_dir/slf4j-api-17.jar $demo_home/jboss-modules/org/slf4j/slf4j-api/1.7/sl
 cp $script_home/resources-jboss/slf4j-api-17-module.xml $demo_home/jboss-modules/org/slf4j/slf4j-api/1.7/module.xml
 
 cp $dep_dir/jboss-modules.jar $demo_home/jboss-modules/
+
+log "Done."

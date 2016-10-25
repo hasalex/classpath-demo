@@ -1,4 +1,4 @@
-package fr.sewatech.classpath;
+package fr.sw.cp;
 
 import fr.sewatech.classloader.MavenRepositoryParentFirstClassLoader;
 import fr.sewatech.classloader.MavenRepositoryLocalFirstClassLoader;

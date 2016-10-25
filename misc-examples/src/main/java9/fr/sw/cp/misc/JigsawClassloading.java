@@ -1,23 +1,23 @@
-package fr.sewatech.classpath.example;
+package fr.sw.cp.misc;
 
 import javax.xml.bind.JAXB;
 
 import java.lang.reflect.Layer;
 import java.lang.reflect.Module;
 
-import static fr.sewatech.classpath.example.ClassUtil.print;
+import static fr.sw.cp.misc.ClassUtil.print;
 
 public class JigsawClassloading {
     public static void main(String[] args) {
-        print(StandardClassLoading.class);
+        print(JigsawClassloading.class);
         print(String.class);
-        ClassLoader classLoader = StandardClassLoading.class.getClassLoader();
+        ClassLoader classLoader = JigsawClassloading.class.getClassLoader();
         print(classLoader.getClass());
         print(classLoader.getParent(), "Parent classpath for JigsawClassloading");
         print(classLoader.getParent().getParent(), "Grand-parent classpath for JigsawClassloading");
         print(JAXB.class);
 
-        printModule(StandardClassLoading.class);
+        printModule(JigsawClassloading.class);
     }
 
     private static void printModule(Class<?> clazz) {

@@ -25,17 +25,25 @@ public class Service {
         this.lines = readAllLines("/lyrics.txt");
     }
 
-    public void hello(boolean withLog) {
+    public void hello(boolean debug) {
         Printer printer = new MessagePrinter(outputStream);
         String line = lines.get(ThreadLocalRandom.current().nextInt(lines.size()));
         Message message = new Message("Salut à toi {}", line);
         printer.print(message);
-        if (withLog) log(line);
+        if (debug) log(line);
     }
 
     private void log(String... text) {
-        System.err.println("*** LOG : " + MessageFormatter.arrayFormat("Message to \"{}\"", text)
-                .getMessage() + " ***\n");
+        try {
+            System.err.println("*** DEBUG : " + MessageFormatter.arrayFormat("Message to \"{}\"", text)
+                    .getMessage() + " ***\n");
+        } catch (Error e) {
+            String rocket = "\uD83D\uDE80 ";
+            System.err.println(""
+                    + rocket + rocket + rocket + "\n"
+                    + "ERROR " + e + "\n"
+                    + rocket + rocket + rocket);
+        }
     }
 
     private List<String> readAllLines(String path) {

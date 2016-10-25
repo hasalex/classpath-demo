@@ -1,4 +1,4 @@
-package fr.sewatech.classpath.example;
+package fr.sw.cp.misc;
 
 public class Count {
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class Count {
     }
     private static void slowDown() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(250);
         } catch (InterruptedException e) {
         }
     }

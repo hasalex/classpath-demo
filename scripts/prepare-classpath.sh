@@ -2,7 +2,7 @@
 source `dirname $0`/setenv.sh
 
 cd $src_home
-mvn clean install
+run mvn clean install
 
 rm -rf $demo_home/lib
 mkdir -p $demo_home/lib

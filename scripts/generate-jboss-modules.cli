@@ -15,5 +15,5 @@ module add --name=fr.sewatech.message-service          \
 module add --name=fr.sewatech.message-launcher         \
            --resources=~/.m2/repository/fr/sewatech/conference/message-launcher/$version/message-launcher-$version.jar \
            --dependencies=fr.sewatech.message-service  \
-           --main-class=fr.sewatech.classpath.Hello
+           --main-class=Hello
 # Fix manually the slots for the dependenies to slf4j

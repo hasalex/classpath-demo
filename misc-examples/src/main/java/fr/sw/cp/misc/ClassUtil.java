@@ -1,13 +1,13 @@
-package fr.sewatech.classpath.example;
+package fr.sw.cp.misc;
 
 import static java.lang.System.out;
 
 public class ClassUtil {
-    public static void print(Class<?> clazz) {
+    static void print(Class<?> clazz) {
         print(clazz.getClassLoader(), "Classloader type for " + clazz.getSimpleName());
     }
 
-    public static void print(ClassLoader classLoader, String description) {
+    static void print(ClassLoader classLoader, String description) {
         print(description);
         print(classLoader);
     }

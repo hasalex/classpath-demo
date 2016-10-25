@@ -1,4 +1,4 @@
-package fr.sewatech.classpath;
+package fr.sw.cp;
 
 import java.io.File;
 import java.io.OutputStream;

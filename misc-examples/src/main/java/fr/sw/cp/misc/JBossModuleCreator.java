@@ -1,4 +1,4 @@
-package fr.sewatech.classpath.example;
+package fr.sw.cp.misc;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

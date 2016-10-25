@@ -39,34 +39,34 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 ../classpath-demo/scripts/prepare-classpath.sh
 
 # Ça ne marche pas
-java fr.sewatech.classpath.example.Count 40 45
+java Count 40 45
 
 # Ça marche
-java -cp lib/misc-example.jar fr.sewatech.classpath.example.Count 40 45
+java -cp lib/misc-example.jar Count 40 45
 
 Démo 2 : bootclasspath
 -----------
 
 # Court-circuiter le Integer par défaut
-java -Xbootclasspath/p:lib/misc-example.jar fr.sewatech.classpath.example.Count 40 45
+java -Xbootclasspath/p:lib/misc-example.jar Count 40 45
 
 # En théorie, le endorsed ne devrait pas avoir d'effet sur Integer. En réalité,...
-java -Djava.endorsed.dirs=lib fr.sewatech.classpath.example.Count 40 45
+java -Djava.endorsed.dirs=lib Count 40 45
 
 Démo 3 : URLClassLoader
 -----------
 
 # Ça ne marche pas
-java -cp lib/message-launcher.jar fr.sewatech.classpath.Hello
+java -cp lib/message-launcher.jar Hello
 
 # Ça marche
-java -cp "lib/*" fr.sewatech.classpath.Hello
+java -cp "lib/*" Hello
 
 # Ça marche
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar HelloViaURL
 
 # Ça ne marche pas
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaURL
 
 Démo 4 : Custom ClassLoader
 -----------
@@ -75,20 +75,20 @@ Démo 4 : Custom ClassLoader
 cd ../classpath-demo; mvn install; cd ../classpath-demo-work
 
 # Ça marche
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+java -cp lib/message-launcher.jar HelloViaMvnRepo 2.0-SNAPSHOT
 # Ça marche
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+java -cp lib/message-launcher.jar HelloViaMvnRepo 2.0-SNAPSHOT local
 
 # Ça ne marche pas
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaMvnRepo 2.0-SNAPSHOT
 # Ça marche
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaMvnRepo 2.0-SNAPSHOT local
 
 Démo 5 : jar hell
 -----------
 
 # Ça ne marche pas
-java -cp "lib/*" fr.sewatech.classpath.Hello log
+java -cp "lib/*" Hello log
 
 Démo 6 : jboss modules
 -----------
@@ -105,9 +105,9 @@ Démo 7 : jigsaw
 -----------
 
 # OK
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello
+java --module-path jigsaw-modules -m message.launcher/Hello
 # KO
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello log
+java --module-path jigsaw-modules -m message.launcher/Hello log
 
 Démo 8 : modular JDK
 -----------
@@ -118,8 +118,8 @@ Démo 9 : jigsaw - mode classpath
 -----------
 
 # Ça marche encore
-java -cp jigsaw-modules/misc-examples.jar fr.sewatech.classpath.example.Count 40 45
-java -cp "jigsaw-modules/*" fr.sewatech.classpath.Hello
+java -cp jigsaw-modules/misc-examples.jar Count 40 45
+java -cp "jigsaw-modules/*" Hello
 
 # Ça ne marche plus
 java -cp lib/misc-examples.jar fr.sewatech.classpath.example.JaxBExample
@@ -149,65 +149,65 @@ Démo 11 : export
 -----------
 
 # Patch slf4j with scripts/prepare-slf4j.sh
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello log
+java --module-path jigsaw-modules -m message.launcher/Hello log
 # l'erreur est plus explicite ; si on avait eu ce jar à la compilation,l'erreur aurait eu lieu à la compilation
 
 Démo 12 : classloader
 -----------
 
 # OK
-java -cp jigsaw-modules/message-launcher.jar fr.sewatech.classpath.HelloViaURL
+java -cp jigsaw-modules/message-launcher.jar HelloViaURL
 # KO
-java -cp jigsaw-modules/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaURL
+java -cp jigsaw-modules/message-launcher.jar:lib/message-service.jar HelloViaURL
 
 # Erreur : -Xbootclasspath/p is no longer a supported option
-java -Xbootclasspath/p:jigsaw-modules/misc-examples.jar fr.sewatech.classpath.example.Count 40 45
+java -Xbootclasspath/p:jigsaw-modules/misc-examples.jar Count 40 45
 # Erreur : -Djava.endorsed.dirs=lib is not supported
-java -Djava.endorsed.dirs=lib fr.sewatech.classpath.example.Count 40 45
+java -Djava.endorsed.dirs=lib Count 40 45
 
 # Prepare patch with scripts/prepare-patch.sh
-java --module-path jigsaw-modules -m misc.examples/fr.sewatech.classpath.example.Count
-java --patch-module java.base=../classpath-demo/misc-examples/target/patch-classes --module-path jigsaw-modules -m misc.examples/fr.sewatech.classpath.example.Count
+java --module-path jigsaw-modules -m misc.examples/Count
+java --patch-module java.base=../classpath-demo/misc-examples/target/patch-classes --module-path jigsaw-modules -m misc.examples/Count
 
 Annexe
 -----------
 
 # KO
-java -cp lib/message-launcher.jar fr.sewatech.classpath.Hello
+java -cp lib/message-launcher.jar Hello
 # OK
-java -cp "lib/*" fr.sewatech.classpath.Hello
+java -cp "lib/*" Hello
 # OK
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar HelloViaURL
 # KO
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaURL
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaURL
 # OK
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+java -cp lib/message-launcher.jar HelloViaMvnRepo 2.0-SNAPSHOT
 # OK
-java -cp lib/message-launcher.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+java -cp lib/message-launcher.jar HelloViaMvnRepo 2.0-SNAPSHOT local
 # KO
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaMvnRepo 2.0-SNAPSHOT
 # OK
-java -cp lib/message-launcher.jar:lib/message-service.jar fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+java -cp lib/message-launcher.jar:lib/message-service.jar HelloViaMvnRepo 2.0-SNAPSHOT local
 # KO
-java -cp "lib/*" fr.sewatech.classpath.Hello log
+java -cp "lib/*" Hello log
 
 # expliquer les modules internes (java.xml.bind)
-java -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
-java --add-modules java.xml.bind -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
+java -cp lib/misc-examples.jar Standard
+java --add-modules java.xml.bind -cp lib/misc-examples.jar Standard
 
 # Build (dans le bon répertoire) avec JDK 9 avec jigsaw-nightly
 export JAVA_HOME=~/Projet/hasalex/jigsaw/jdk-9b138.jdk/Contents/Home
 cd ../classpath-demo; mvn clean install -Pjigsaw; cd ../classpath-demo-work
 
 # OK
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaURL
+java --module-path jigsaw-modules -m message.launcher/HelloViaURL
 # OK
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.HelloViaMvnRepo 2.0-SNAPSHOT local
+java --module-path jigsaw-modules -m message.launcher/HelloViaMvnRepo 2.0-SNAPSHOT
+java --module-path jigsaw-modules -m message.launcher/HelloViaMvnRepo 2.0-SNAPSHOT local
 # KO
-java --module-path jigsaw-modules -m message.launcher/fr.sewatech.classpath.Hello log
+java --module-path jigsaw-modules -m message.launcher/Hello log
 
 # Modules vs Classpath : aucun changement visible
 # classpath = unnamed module
-java --add-modules java.xml.bind -cp lib/misc-examples.jar fr.sewatech.classpath.example.StandardClassLoading
-java --module-path jigsaw-modules -m misc.examples/fr.sewatech.classpath.example.StandardClassLoading
+java --add-modules java.xml.bind -cp lib/misc-examples.jar Standard
+java --module-path jigsaw-modules -m misc.examples/Standard

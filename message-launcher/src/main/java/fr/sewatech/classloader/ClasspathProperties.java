@@ -1,4 +1,4 @@
-package fr.sewatech.classpath.util;
+package fr.sewatech.classloader;
 
 public class ClasspathProperties {
     public static void printProperties() {

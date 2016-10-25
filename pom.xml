@@ -81,9 +81,11 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.6-jigsaw-SNAPSHOT</version>
                         <configuration>
+                            <fork>true</fork>
                             <compilerArgs>
-                                <arg>--add-modules</arg>
-                                <arg>java.xml.bind</arg>
+                                <!-- Doesn't work -->
+                                <compilerArg>--add-modules</compilerArg>
+                                <compilerArg>java.xml.bind,jdk.unsupported</compilerArg>
                             </compilerArgs>
                         </configuration>
                         <dependencies>
@@ -133,6 +135,10 @@
                 </plugins>
             </build>
             <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://repo1.maven.org/maven2/</url>
+                </pluginRepository>
                 <pluginRepository>
                     <!-- plexus-compiler snapshot -->
                     <id>hasalex bintray</id>
