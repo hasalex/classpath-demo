@@ -1,4 +1,6 @@
 // Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
 {
-    "editor.fontSize": 14
+//    "editor.fontSize": 14
+    "window.zoomLevel": 2,
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

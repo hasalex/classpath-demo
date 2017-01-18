@@ -8,22 +8,22 @@ import java.net.URLClassLoader;
 
 public class Advanced {
 
-    private static final String SUCCESS = "\u2713 : ";
-    private static final String WARNING = "\u26A0 : ";
+    private static final String SUCCESS = "\t\u2713 : ";
+    private static final String WARNING = "\t\u26A0 : ";
 
     public static void main(String[] args) {
-        System.out.println("= Advanced Class Loading =");
+        System.out.println("\n\t= Advanced Class Loading =\n");
 
         accessToJaxB();
         accessToUnsafe();
-//        castToUrlClassLoader();
+        castToUrlClassLoader();
     }
 
     private static void accessToJaxB() {
         try {
-            System.out.println(SUCCESS + "Successful access to " + JAXB.class);
+            System.out.println(SUCCESS + "Successful access to " + JAXB.class + "\n");
         } catch (NoClassDefFoundError err) {
-            System.out.println(WARNING + "Cannot access to class " + err.getMessage());
+            System.out.println(WARNING + "Cannot access to class " + err.getMessage() + "\n");
         }
     }
 
@@ -34,11 +34,11 @@ public class Advanced {
             unsafeInstanceField.setAccessible(true);
             Unsafe unsafe = (Unsafe) unsafeInstanceField.get(null);
 
-            System.out.println("... page size " + unsafe.pageSize());
+            System.out.println("\t... page size " + unsafe.pageSize() + "\n");
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println(WARNING + "Failed to access to unsafe due to " + e);
+            System.out.println(WARNING + "Failed to access to unsafe due to " + e + "\n");
         } catch (NoClassDefFoundError err) {
-            System.out.println(WARNING + "Cannot access to class " + err.getMessage());
+            System.out.println(WARNING + "Cannot access to class " + err.getMessage() + "\n");
         }
     }
 
@@ -46,9 +46,9 @@ public class Advanced {
         try {
             ClassLoader classLoader = Advanced.class.getClassLoader();
             URLClassLoader urlClassLoader = (URLClassLoader) classLoader;
-            System.out.println(SUCCESS + "Successfully casted class loader to URLClassLoader");
+            System.out.println(SUCCESS + "Successfully casted class loader to URLClassLoader" + "\n");
         } catch (ClassCastException e) {
-            System.out.println(WARNING + "Failed to cast class loader to URLClassLoader");
+            System.out.println(WARNING + "Failed to cast class loader to URLClassLoader" + "\n");
         }
     }
 }

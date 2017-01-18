@@ -38,11 +38,11 @@ public class Service {
             System.err.println("*** DEBUG : " + MessageFormatter.arrayFormat("Message to \"{}\"", text)
                     .getMessage() + " ***\n");
         } catch (Error e) {
-            String rocket = "\uD83D\uDE80 ";
+            String rocket = "\uD83D\uDE80  ";
             System.err.println(""
-                    + rocket + rocket + rocket + "\n"
-                    + "ERROR " + e + "\n"
-                    + rocket + rocket + rocket);
+                    + "\t" + rocket + rocket + rocket + "\n"
+                    + "\t"+ "ERROR " + e + "\n"
+                    + "\t"+ rocket + rocket + rocket);
         }
     }
 

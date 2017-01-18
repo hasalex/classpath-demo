@@ -2,6 +2,8 @@ package fr.sw.cp.misc;
 
 public class Count {
     public static void main(String[] args) {
+        System.out.println();
+
         Integer start;
         Integer stop;
         if (args.length == 0) {
@@ -21,6 +23,8 @@ public class Count {
             System.out.println("\t" + i);
             slowDown();
         }
+
+        System.out.println();
     }
     private static void slowDown() {
         try {

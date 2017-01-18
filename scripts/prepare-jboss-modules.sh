@@ -1,7 +1,7 @@
 #!/bin/bash
 source `dirname $0`/setenv.sh
 
-cd $src_home
+cd $workspace_home
 run mvn clean install -Pjboss
 
 rm -rf $demo_home/jboss-modules

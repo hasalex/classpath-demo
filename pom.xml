@@ -57,7 +57,6 @@
             <properties>
                 <maven.compiler.source>9</maven.compiler.source>
                 <maven.compiler.target>9</maven.compiler.target>
-                <plexusCompilerVersion>2.8.2-SNAPSHOT</plexusCompilerVersion>
             </properties>
             <build>
                 <plugins>
@@ -79,58 +78,7 @@
                     </plugin>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.6-jigsaw-SNAPSHOT</version>
-                        <configuration>
-                            <fork>true</fork>
-                            <compilerArgs>
-                                <!-- Doesn't work -->
-                                <compilerArg>--add-modules</compilerArg>
-                                <compilerArg>java.xml.bind,jdk.unsupported</compilerArg>
-                            </compilerArgs>
-                        </configuration>
-                        <dependencies>
-                            <!-- useful for testCompile -->
-                            <dependency>
-                                <groupId>org.ow2.asm</groupId>
-                                <artifactId>asm</artifactId>
-                                <version>6.0_ALPHA</version>
-                            </dependency>
-
-                            <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-compiler-api</artifactId>
-                                <version>${plexusCompilerVersion}</version>
-                                <exclusions>
-                                    <exclusion>
-                                        <groupId>org.codehaus.plexus</groupId>
-                                        <artifactId>plexus-component-api</artifactId>
-                                    </exclusion>
-                                </exclusions>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-compiler-manager</artifactId>
-                                <version>${plexusCompilerVersion}</version>
-                                <exclusions>
-                                    <exclusion>
-                                        <groupId>org.codehaus.plexus</groupId>
-                                        <artifactId>plexus-component-api</artifactId>
-                                    </exclusion>
-                                </exclusions>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.codehaus.plexus</groupId>
-                                <artifactId>plexus-compiler-javac</artifactId>
-                                <version>${plexusCompilerVersion}</version>
-                                <scope>runtime</scope>
-                                <exclusions>
-                                    <exclusion>
-                                        <groupId>org.codehaus.plexus</groupId>
-                                        <artifactId>plexus-component-api</artifactId>
-                                    </exclusion>
-                                </exclusions>
-                            </dependency>
-                        </dependencies>
+                        <version>3.6.1</version>
                     </plugin>
                 </plugins>
             </build>

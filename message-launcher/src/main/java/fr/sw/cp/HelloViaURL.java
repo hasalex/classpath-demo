@@ -25,9 +25,17 @@ public class HelloViaURL {
                                             true,
                                             classLoader);
 
-        Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
-        Object mainObject = constructor.newInstance(System.out);
-        Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
-        mainMethod.invoke(mainObject, false);
+        System.out.println();
+        try {
+            Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
+            Object mainObject = constructor.newInstance(System.out);
+            Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
+            mainMethod.invoke(mainObject, false);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println();
+        }
+
     }
 }

@@ -30,13 +30,20 @@ public class HelloViaMvnRepo {
             classLoader = new MavenRepositoryParentFirstClassLoader(artefacts);
         }
 
-         Class<?> mainClass = Class.forName("fr.sewatech.message.Service",
-                                        true,
-                                        classLoader);
+        System.out.println();
+        try {
+            Class<?> mainClass = Class.forName("fr.sewatech.message.Service",
+                                            true,
+                                            classLoader);
 
-        Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
-        Object mainObject = constructor.newInstance(System.out);
-        Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
-        mainMethod.invoke(mainObject, false);
+            Constructor<?> constructor = mainClass.getDeclaredConstructor(OutputStream.class);
+            Object mainObject = constructor.newInstance(System.out);
+            Method mainMethod = mainClass.getDeclaredMethod("hello", boolean.class);
+            mainMethod.invoke(mainObject, false);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println();
+        }
     }
 }

@@ -26,9 +26,9 @@ public class JigsawClassloading {
         System.out.println("- Module : " + module.getName());
         Layer layer = module.getLayer();
         printLayer(layer, "Layer");
-        if (layer != null) {
-            layer.parent().ifPresent(parent -> printLayer(parent, "Parent layer"));
-        }
+        // if (layer != null) {
+        //     layer.parent().ifPresent(parent -> printLayer(parent, "Parent layer"));
+        // }
     }
 
     private static void printLayer(Layer layer, String description) {
